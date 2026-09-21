@@ -15,7 +15,10 @@ from langfuse.langchain import CallbackHandler
 
 from tracing import langfuse  # noqa: F401 - re-exported for scripts that want the raw client too
 
-sys.stdout.reconfigure(encoding="utf-8")
+# Only real script stdout (io.TextIOWrapper) supports reconfigure() - under a Jupyter
+# kernel sys.stdout is ipykernel's OutStream, which doesn't have this method.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 load_dotenv()
 
 # One handler, reused across every chain/model in a script so their traces

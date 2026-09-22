@@ -6,3 +6,5 @@ __pycache__
 docs
 .ruff_cache
 data
+.DS_Store
+/projet 1 OCR/
